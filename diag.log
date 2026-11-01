@@ -1,0 +1,16 @@
+=== node ===
+v26.3.0
+11.16.0
+=== docker ===
+INFO: Could not find files for the given pattern(s).
+'docker' is not recognized as an internal or external command,
+operable program or batch file.
+=== psql ===
+INFO: Could not find files for the given pattern(s).
+File Not Found
+=== services ===
+=== port 5432 ===
+=== files ===
+env-present
+node_modules-present
+=== done ===

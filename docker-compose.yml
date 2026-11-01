@@ -1,0 +1,22 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: umkm_saham_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER:-umkm_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-umkm_dev_password}
+      POSTGRES_DB: ${DB_NAME:-umkm_saham}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-umkm_user} -d ${DB_NAME:-umkm_saham}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
